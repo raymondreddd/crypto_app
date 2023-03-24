@@ -9,12 +9,12 @@ import {useGetCryptosQuery} from '../services/cryptoApi'
 const {Title} = Typography;
 const Homepage = () => {
 
-  const {data, isFetching} = useGetCryptosQuery();
+  const { data: fetched_data, isFetching } = useGetCryptosQuery(10);
 
-  const globalStats = data?.data?.stats;
-  console.log(data);
+  const globalStats = fetched_data?.data?.stats;
+  console.log('global data',fetched_data);
 
-  if(isFetching)return "Loading";
+  if(isFetching)return "Loading...";
 
   return (
     <>
@@ -30,12 +30,6 @@ const Homepage = () => {
       <Col span={12}><Statistic title="Total Markets" value={millify(globalStats.totalMarkets)} /></Col>
       
     </Row>
-
-    <div className='home-heading-container'>
-      <Title level={2} className="home-title">Top 10 Cryptocurrencues in the World</Title>
-      <Title level={3} className="show-more"><Link to="/cryptocurrencies">Show More</Link></Title>
-    </div>
-    <Cryptocurrencies simplified />
 
     <div className='home-heading-container'>
       <Title level={2} className="home-title">Top 10 Cryptocurrencies in the World</Title>
