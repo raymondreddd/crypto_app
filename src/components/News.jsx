@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Select, Typography, Row, Col, Avatar, Card } from 'antd';
 import moment from 'moment';
+// import { Loader } from './Loader';
 
 import { useGetCryptosQuery } from '../services/cryptoApi';
 
 import {useGetCryptoNewsQuery} from '../services/cryptoNewsApi';
-// import Loader from './Loader';
+import Loader from './Loader';
 
 const demoImage = 'https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News';
 
@@ -19,8 +20,9 @@ const News = ({ simplified }) => {
 
   const { data: cryptoNews } = useGetCryptoNewsQuery({ newsCategory: newsCategory, count: simplified ? 6 : 20 });
 
+
   console.log('news data',cryptoNews);
-  if (!cryptoNews?.value) return "empty";
+  if (!cryptoNews?.value) return <Loader />;
 
   return (
     <Row gutter={[24, 24]}>
